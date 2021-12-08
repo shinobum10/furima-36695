@@ -17,29 +17,21 @@
 ・has_many :purchase_records
 
 
-
-
-
-
-
 ## itemsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false|
 |price|integer|null: false|
-|description|string|null: false|
+|description|text|null: false|
 |cost_id|integer|null: false|
-|day_id|integer|null: false|
+|duration_id|integer|null: false|
 |prefecture_id|integer|null: false|
-|category_id|integer|null: false, foreign_key: true|
-|brand_id|integer|null: false, foreign_key: true|
-|user_id|integer|integer|null: false, foreign_key: true|
+|category_id|integer|null: false|
+|brand_id|integer|null: false|
+|user|integer|integer|null: false, references :user|
 
-### Association・belongs_to :user 
-
-・belongs_to :category 
-
-・belongs_to :brand 
+### Association
+・belongs_to :user 
 
 ・has_many :images 
 
@@ -49,25 +41,28 @@
 ## destinationテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
+|post_code|integer|null: false|
 |prefecture_id|integer|null: false|
 |city|string|null: false|
 |address|string|null: false|
 |building_name|string||
 |phone_number|string|null: false|
+|brand_id|integer|null: false, references :brand|
 
 ### Association
 
-・belongs_to_active_hash :purchase_records
+・has_many :purchase_records
 
 ## purchase_recordテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|brand_id|integer|null: false, foreign_key: true|
+|user|integer|null: false, references :user|
+|brand|integer|null: false, references :brand|
 
 ### Association
 
 ・belongs_to :item
+
+・belongs_to :user 
 
 
