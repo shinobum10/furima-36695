@@ -3,7 +3,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |nickname|string|null: false|
-|email|string|null: false|
+|email|string|null: false, unique: true|
 |encrypted_password|string|null: false|
 |family_name|string|null: false|
 |first_name|string|null: false|
@@ -14,9 +14,9 @@
 ### Association
 ・has_many :items 
 
-・has_many :purchase_record
+・has_many :purchase_records
 
-・has_one :destination
+
 
 
 
@@ -26,13 +26,10 @@
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false|
-|price|string|null: false|
+|price|integer|null: false|
 |description|string|null: false|
-|status|string|null: false|
-|jugment|string||
-|size|string|null: false|
-|cost|string|null: false|
-|days|string|null: false|
+|cost_id|integer|null: false|
+|day_id|integer|null: false|
 |prefecture_id|integer|null: false|
 |category_id|integer|null: false, foreign_key: true|
 |brand_id|integer|null: false, foreign_key: true|
@@ -53,11 +50,6 @@
 |Column|Type|Options|
 |------|----|-------|
 |user_id|integer|null: false, foreign_key: true|
-|family_name|string|null: false|
-|first_name|string|null: false|
-|family_name_kana|string|null: false|
-|first_name_kana|string|null: false|
-|post_cord|string|null: false|
 |prefecture_id|integer|null: false|
 |city|string|null: false|
 |address|string|null: false|
@@ -66,7 +58,7 @@
 
 ### Association
 
-・belongs_to_active_hash :prefecture
+・belongs_to_active_hash :purchase_records
 
 ## purchase_recordテーブル
 |Column|Type|Options|
