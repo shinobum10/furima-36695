@@ -5,8 +5,6 @@
 |nickname|string|null: false|
 |email|string|null: false|
 |encrypted_password|string|null: false|
-|user_image|string|
-|introduction|text|
 |family_name|string|null: false|
 |first_name|string|null: false|
 |family_name_kana|string|null: false|
@@ -14,15 +12,17 @@
 |birth_day|date|null: false|
 
 ### Association
-・has_many :products dependent: :destroy
+・has_many :items 
 
-・belongs_to :destination dependent: :destroy
+・has_many :purchase_record
 
-・belongs_to :card dependent: :destroy
+・has_one :destination
 
 
 
-## productテーブル
+
+
+## itemsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false|
@@ -36,16 +36,15 @@
 |prefecture_id|integer|null: false|
 |category_id|integer|null: false, foreign_key: true|
 |brand_id|integer|null: false, foreign_key: true|
-|user_id|integer|null: false, foreign_key: true|
+|user_id|integer|integer|null: false, foreign_key: true|
 
-### Association
-・belongs_to :user dependent: :destroy
+### Association・belongs_to :user 
 
-・belongs_to :category dependent: :destroy
+・belongs_to :category 
 
-・belongs_to :brand dependent: :destroy
+・belongs_to :brand 
 
-・has_many :images dependent: :destroy
+・has_many :images 
 
 ・belongs_to_active_hash :prefecture
 
@@ -59,15 +58,24 @@
 |family_name_kana|string|null: false|
 |first_name_kana|string|null: false|
 |post_cord|string|null: false|
-|prefecture|string|null: false|
+|prefecture_id|integer|null: false|
 |city|string|null: false|
 |address|string|null: false|
 |building_name|string||
-|phone_number|string||
+|phone_number|string|null: false|
 
 ### Association
-・belongs_to :user
 
+・belongs_to_active_hash :prefecture
 
+## purchase_recordテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null: false, foreign_key: true|
+|brand_id|integer|null: false, foreign_key: true|
+
+### Association
+
+・belongs_to :item
 
 
