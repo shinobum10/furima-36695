@@ -33,25 +33,26 @@
 ### Association
 ・belongs_to :user 
 
-・has_many :images 
+・has_one :purchase_record
 
-・belongs_to_active_hash :prefecture
 
 
 ## destinationテーブル
 |Column|Type|Options|
 |------|----|-------|
-|post_code|integer|null: false|
+|post_code|string|null: false|
 |prefecture_id|integer|null: false|
 |city|string|null: false|
 |address|string|null: false|
 |building_name|string||
 |phone_number|string|null: false|
-|brand_id|integer|null: false, references :brand|
+|purchase_record|string|foreign_key: true|
+|user|integer|null: false, foreign_key: true|
+|item|string|null: false, foreign_key: true|
 
 ### Association
 
-・has_many :purchase_records
+・belongs_to :purchase_records
 
 ## purchase_recordテーブル
 |Column|Type|Options|
