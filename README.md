@@ -28,7 +28,7 @@
 |prefecture_id|integer|null: false|
 |category_id|integer|null: false|
 |brand_id|integer|null: false|
-|user|integer|integer|null: false, references :user|
+|user|references|null: false, foreign_key: true|
 
 ### Association
 ・belongs_to :user 
@@ -46,19 +46,18 @@
 |address|string|null: false|
 |building_name|string||
 |phone_number|string|null: false|
-|purchase_record|string|foreign_key: true|
-|user|integer|null: false, foreign_key: true|
-|item|string|null: false, foreign_key: true|
+|purchase_record|references|null: false,foreign_key: true|
+
 
 ### Association
 
-・belongs_to :purchase_records
+・belongs_to :purchase_record
 
 ## purchase_recordテーブル
 |Column|Type|Options|
 |------|----|-------|
-|user|integer|null: false, references :user|
-|brand|integer|null: false, references :brand|
+|user|references|null: false, foreign_key: true|
+|item|references|null: false, foreign_key: true|
 
 ### Association
 
