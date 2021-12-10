@@ -65,6 +65,6 @@
 
 ・belongs_to :user 
 
-・belongs_to :destination
+・has_one :destination
 
 
