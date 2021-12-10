@@ -37,7 +37,7 @@
 
 
 
-## destinationテーブル
+## destinationsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |post_code|string|null: false|
@@ -53,7 +53,7 @@
 
 ・belongs_to :purchase_record
 
-## purchase_recordテーブル
+## purchase_recordsテーブル
 |Column|Type|Options|
 |------|----|-------|
 |user|references|null: false, foreign_key: true|
@@ -64,5 +64,7 @@
 ・belongs_to :item
 
 ・belongs_to :user 
+
+・belongs_to :destination
 
 
