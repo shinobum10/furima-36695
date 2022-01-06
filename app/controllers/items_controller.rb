@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
  # before_action :set_item, only: [:index, :create, :new]
   
   def index 
-    @items = Item.all
+    @items = Item.order(id: "DESC")
   end
 
   def new
@@ -27,8 +27,9 @@ class ItemsController < ApplicationController
     params.require(:item).permit(:name, :price, :description, :cost_id, :duration_id, :prefecture_id, :category_id, :brand_id, :user, :image).merge(user_id: current_user.id)
   end
 
-  def set_item
-    @item = Item.find(params[:id])
-  end
+  # def set_item
+  #  @item = Item.find(params[:id])
+  # end
+  
 end
 
