@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
-  before_action :set_item, only: [:name, :price, :description, :cost_id, :duration_id, :Prefecture_id, :category_id, :brand_id]
+  before_action :set_item, only: [:index, :create, :new]
   
   def index 
     @items = Item.all
