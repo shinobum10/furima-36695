@@ -3,16 +3,11 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show]
   
   def index 
-    @items = Item.all
     @items = Item.order(id: "DESC")
   end
 
   def new
-    if user_signed_in?
-       @item = Item.new 
-    else
-       redirect_to user_session_path(@item.id)
-    end
+    @item = Item.new 
   end
 
   # def edit
@@ -29,14 +24,14 @@ class ItemsController < ApplicationController
     @item = Item.new(item_params)
     if @item.valid?
        @item.save
-       redirect_to items_path
+       redirect_to root_path
     else
       render :new
     end
   end
 
   def show
-    @item = Item.find(params[:id])
+    
   end
 
   private
