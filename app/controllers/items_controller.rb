@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new]
-  before_action :set_item, only: [:show]
+  before_action :authenticate_user!, only: [:new, :edit]
+  before_action :set_item, only: [:show, :edit, :update]
   
   def index 
     @items = Item.order(id: "DESC")
@@ -10,9 +10,12 @@ class ItemsController < ApplicationController
     @item = Item.new 
   end
 
-  # def edit
-  #   @item = Item.find(params[:id])
-  # end
+  def edit
+    @item = Item.find(params[:id])
+    @item.save
+    redirect_to root_path
+    
+  end
   
   # def destroy
   #   @item = Item.find(params[:id])
@@ -30,6 +33,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def update
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    if @item.valid?
+      @item.save
+      redirect_to root_path
+   else
+     render :new
+   end
+  end
+  
   def show
     
   end
