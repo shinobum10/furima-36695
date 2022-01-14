@@ -4,17 +4,20 @@ class PurchaseRecordsController < ApplicationController
     @item = Item.find(params[:item_id])
   end 
 
+  def new
+    @purchase_records = PurchaseAddress.new
+  end
+  
+  
   def create
     @item = Item.find(params[:item_id])
-   @purchase_records = PurchaseAddress.new(purchase_address_params)
-   if @purchase_records.valid?
-      @purchase_records.save
-      redirect_to root_path
+    @purchase_records = PurchaseAddress.new(purchase_address_params)
+    if @purchase_records.valid?
+       @purchase_records.save
+       redirect_to root_path
     else
       render :index
     end
-    
-     
   end
     
     

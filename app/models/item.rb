@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :cost
   belongs_to :duration
   belongs_to :prefecture
-  belongs_to :purchase_record
+  has_one :purchase_record
  
 
   with_options presence: true do
