@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   
@@ -11,7 +12,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if current_user.id != @item.user_id
+    if  (current_user.id != @item.user_id) || @item.purchase_record.present?
       redirect_to root_path
     end
   end
@@ -54,6 +55,7 @@ class ItemsController < ApplicationController
 
   def set_item
    @item = Item.find(params[:id])
+   
   end
 end
 
