@@ -21,42 +21,62 @@ RSpec.describe PurchaseAddress, type: :model do
 
 
     context '内容に問題がある場合' do
-      it 'post_codeが空だと保存できないこと' do
+      it 'post_codeが空だと購入できないこと' do
         @destination.post_code = ''
         @destination.valid?
         expect(@destination.errors.full_messages).to include("Post code can't be blank")
       end
-      it 'post_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
+      it 'post_codeが半角のハイフンを含んだ正しい形式でないと購入できないこと' do
         @destination.post_code = '1234567'
         @destination.valid?
         expect(@destination.errors.full_messages).to include("Post code is invalid")
       end
-      it 'prefectureを選択していないと保存できないこと' do
+      it 'prefectureを選択していないと購入できないこと' do
         @destination.prefecture_id = 1
         @destination.valid?
         expect(@destination.errors.full_messages).to include("Prefecture can't be blank")
       end
-      it 'cityが空だと保存できないこと' do
+      it 'cityが空だと購入できないこと' do
         @destination.city = ''
         @destination.valid?
         expect(@destination.errors.full_messages).to include("City can't be blank")
       end
-      it 'addressが空だと保存できないこと' do
+      it 'addressが空だと購入できないこと' do
         @destination.address = ''
         @destination.valid?
         expect(@destination.errors.full_messages).to include("Address can't be blank")
       end
-      it 'phone_numberが空だと保存できないこと' do
+      it 'phone_numberが空だと購入できないこと' do
         @destination.phone_number= ''
         @destination.valid?
         expect(@destination.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'userが紐付いていないと保存できないこと' do
+      it 'phone_numberが9桁以下では購入できないこと' do
+        @destination.phone_number= '1234567'
+        @destination.valid?
+        expect(@destination.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberが12桁以上だと購入できないこと' do
+        @destination.phone_number= '123456123456'
+        @destination.valid?
+        expect(@destination.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberに半角数字以外が含まれている場合は購入できないこと' do
+        @destination.phone_number= 'a1234567890'
+        @destination.valid?
+        expect(@destination.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'userが紐付いていないと購入できないこと' do
         @destination.user_id = nil
         @destination.valid?
         expect(@destination.errors.full_messages).to include("User can't be blank")
       end
-      it 'tokenが空だと保存できないこと' do
+      it 'itemが紐付いていないと購入できないこと' do
+        @destination.item_id = nil
+        @destination.valid?
+        expect(@destination.errors.full_messages).to include("Item can't be blank")
+      end
+      it 'tokenが空だと購入できないこと' do
         @destination.token = ''
         @destination.valid?
         expect(@destination.errors.full_messages).to include("Token can't be blank")
