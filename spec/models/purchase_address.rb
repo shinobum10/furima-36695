@@ -56,10 +56,10 @@ RSpec.describe PurchaseAddress, type: :model do
         @destination.valid?
         expect(@destination.errors.full_messages).to include("User can't be blank")
       end
-      it 'itemが紐付いていないと保存できないこと' do
-        @destination.item_id = nil
+      it 'tokenが空だと保存できないこと' do
+        @destination.token = ''
         @destination.valid?
-        expect(@destination.errors.full_messages).to include("Item can't be blank")
+        expect(@destination.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
